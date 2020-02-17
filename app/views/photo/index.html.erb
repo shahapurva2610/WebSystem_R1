@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Photosite</title>
+</head>
+
+<body bgcolor="#99FFCC">
+<div style="color:#696969">
+  <center>
+    <h1 align="center" style="font-family: Cambria; color: #2E2F30; text-decoration: underline" >PhotoSite</h1>
+  </center>
+</div>
+<div>
+  <center>
+    <h1>Photos of <%= @user.first_name %> <%= @user.last_name %></h1>
+    <% @photos.each do |photo| %>
+      </center>
+        <%= image_tag("/assets/#{photo.file_name}") %>
+        <p style="font-size: medium; font-family: Cambria"> Photo Posted On:   <%= photo.date_time %></p>
+          <h3>List of Comments:</h3>
+          <% @comments.where("photo_id=?",photo.id).each do |comment| %>
+              <p style="font-size: medium; font-family: Cambria"> <%= comment.comment_text %></p>
+              <p style="font-family: Calibri" >   - Posted by: <%= link_to display_name(comment.user_id) , user_photos_path(comment.user_id)%> on <%= comment.date_time %></p>
+          <% end %>
+      </ul>
+      <br>
+
+      </div>
+      <br>
+    <%end%>
+
+    </body>
+</html>
